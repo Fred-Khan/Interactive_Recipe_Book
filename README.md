@@ -13,8 +13,8 @@
 - Implement JavaScript functionality to dynamically display featured recipes.
 - Style the homepage using CSS to make it visually appealing.
 
-### Recipe List Page (1 Developer):
-- Create a page to display a list of all available recipes.
+### Recipe List (1 Developer):
+- Display a list of all available recipes.
 - Use HTML to structure the list and include placeholders for each recipe.
 - Implement JavaScript to fetch and display the list of recipes dynamically.
 - Apply CSS styles to make the recipe list visually appealing and easy to navigate.
