@@ -2,8 +2,8 @@
 
 function homePageFunctions() {
     const carousel = document.querySelector('.featuredrecipes .carousel');
-    const wrapper = document.querySelector(".featuredrecipes .wrapper");
-    const arrowBtns = wrapper.querySelectorAll("i");
+    const container = document.querySelector(".featuredrecipes .container");
+    const arrowBtns = container.querySelectorAll("i");
 
     // Function to create recipe cards
     const createRecipeCards = (recipes, container) => {
@@ -187,7 +187,7 @@ function homePageFunctions() {
     const contributeButton = document.getElementById('contributeButton');
     
     breakfastButton.addEventListener('click', function() {
-        window.location.href = 'breakfast.html'; // Navigate to breakfast.html
+        window.location.href = 'recipelist.html'; // Navigate to breakfast.html
     });
     
     lunchButton.addEventListener('click', function() {

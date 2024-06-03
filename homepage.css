@@ -63,8 +63,8 @@ header {
 }
 
 
-/*Featured recipes carousel - also on helpful tips wrapper*/
-.wrapper {
+/*Featured recipes carousel - also on helpful tips container*/
+.container {
 	max-width: fit-content;
 	width: 40%;
 	position: relative;
@@ -72,7 +72,7 @@ header {
 	margin-right: auto;
 }
 
-.wrapper i
+.container i
 	{
 	top: 50%;
 	height: 50px;
@@ -89,15 +89,15 @@ header {
 	transition: transform 0.1s linear;
 }
 
-.wrapper i:first-child {
+.container i:first-child {
 	left: -100px;
 }
 
-.wrapper i:last-child {
+.container i:last-child {
 	right: -100px;
 }
 
-.wrapper .carousel {
+.container .carousel {
 	display: grid;
 	grid-auto-flow: column;
 	grid-auto-columns: calc((100% / 3) - 12px);

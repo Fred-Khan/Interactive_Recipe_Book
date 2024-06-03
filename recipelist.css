@@ -1,0 +1,69 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Change the background color of the body */
+}
+
+#recipes {
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.recipe-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recipe-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+    max-width: 600px;
+    background-color: #fff; /* Different color from the body background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    transition: transform 0.3s;
+    text-decoration: none;
+    color: black;
+}
+
+.recipe-item:hover {
+    transform: scale(1.05);
+}
+
+.recipe-item:nth-child(odd) {
+    align-self: flex-start;
+}
+
+.recipe-item:nth-child(even) {
+    align-self: flex-end;
+}
+
+.recipe-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.recipe-actions {
+    display: flex;
+    justify-content: flex-start; /* Align elements to the left */
+    width: 100%;
+    align-items: center;
+}
+
+button, .favorite {
+    margin-right: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
