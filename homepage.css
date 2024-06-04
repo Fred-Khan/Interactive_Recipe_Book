@@ -109,7 +109,7 @@ header {
 	position: relative;
 }
 
-.carousel::-webkit-scrollbar {
+.carousel  {
 	display: none;
 }
 
@@ -288,7 +288,7 @@ header {
 	text-decoration: none;
 	border: 2px solid black;
 	font-weight: bold;
-	transform: .4s;
+	transform: 1s;
 	padding: 13px 30px;
 }
 
