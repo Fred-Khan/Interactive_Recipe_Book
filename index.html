@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="index.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Fontawesome Link for Icons -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+      <!--Link for Icons eg slider buttons -->
+      <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;1,200;1,300;1,600&display=swap"
+         rel="stylesheet">
+      <!--This is so we can use the font Josefin Sans-->
+      <title>Interactive Recipe Book</title>
+   </head>
+   <body>
+      <header>
+         <nav>
+            <!-- Navigation Bar and Header -->
+            <p>Navigation bar to go here</p>
+         </nav>
+      </header>
+      <main>
+         <section>
+            <div class="logocontainer">
+               <img src="images/logo.png" class="logo" alt="logo">
+               <h3>Delicious recipes for every occasion</h3>
+            </div>
+         </section>
+         <!-----Recipes Section Start---------------------------------->
+         <section>
+            <div class="featuredrecipes">
+               <h3>Featured Recipes</h3>
+               <div class="container">
+                  <i id="left" class="fa-solid fa-angle-left"></i>
+                  <div class="carousel">
+                     <!-- Carousel Items will be dynamically generated here -->
+                  </div>
+                  <i id="right" class="fa-solid fa-angle-right"></i>
+               </div>
+            </div>
+         </section>
+         <section>
+            <div class="allrecipes">
+               <h2>All Recipes</h2>
+               <div class="box">
+                  <div class="card">
+                     <img src="images/pancakesdark.jpg" alt="pancakes">
+                     <div class="boxcontent">
+                        <h3>Breakfast</h3>
+                        <p>The best way to kick start the day</p>
+                        <button id="breakfastButton" class="view" data-link="recipelist.html">Click for a full list</button>
+                     </div>
+                  </div>
+                  <div class="card">
+                     <img src="images/salad.jpg" alt="salad">
+                     <div class="boxcontent">
+                        <h3>Lunch</h3>
+                        <p>Light and refreshing lunches</p>
+                        <button id="lunchButton" class="view" data-link="recipelist.html">Click for a full list</button>
+                     </div>
+                  </div>
+                  <div class="card">
+                     <img src="images/fish.jpg" alt="fish">
+                     <div class="boxcontent">
+                        <h3>Dinner</h3>
+                        <p>Hearty and healthy dinners</p>
+                        <button id="dinnerButton" class="view" data-link="recipelist.html">Click for a full list</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section>
+            <div class="advicesection">
+               <h2>Helpful Tips & Advice</h2>
+               <div class="container">
+                  <i id="slideprev" class="fa-solid fa-angle-left"></i>
+                  <div class="adviceslider">
+                     <div class="advicelist" id="advicelist">
+                        <!-- Carousel Items will be dynamically generated here -->
+                     </div>
+                  </div>
+                  <i id="slidenext" class="fa-solid fa-angle-right"></i>
+               </div>
+            </div>
+         </section>
+         <section id="contribute">
+            <div class="contribute">
+               <button id="contributeButton" class="view" data-link="ContributionForm.html">Contribute Your Own Recipe</button>
+               <!-- Contribute form placeholder will go here -->
+            </div>
+         </section>
+      </main>
+      <footer>
+         <p>&copy; Footer to go here <br>2024 Interactive Recipe Book. All rights reserved.</p>
+         <!-- Footer and Social Media Integration -->
+      </footer>
+      <script src="index.js"></script>
+   </body>
+</html>

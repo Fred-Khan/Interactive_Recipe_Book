@@ -1,0 +1,399 @@
+/* Styles sheet for the home page or any page with shared styles */
+/*General CSS*/
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+h2 {
+	color: #edffef;
+	font-size: 40px;
+	text-transform: capitalize;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+/*Navigation Bar CSS*/
+header {
+	width: 100%;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 100px;
+	background: #acb4b5;
+	text-align: center;
+}
+
+/*Logo section CSS*/
+.logocontainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+  height: 200px;
+}
+
+.logo {
+	width: 300px;
+	height: auto;
+	margin-right: 10px;
+}
+
+.logocontainer h3 {
+  font-size: 25px;
+}
+
+/*Featured Recipe Section CSS*/
+.featuredrecipes {
+	width: 100%;
+	padding: 30px 0px;
+	background-color: #213032;
+}
+
+.featuredrecipes h3 {
+	color: #edffef;
+	font-size: 40px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+
+/*Featured recipes carousel - also on helpful tips container*/
+.container {
+	max-width: fit-content;
+	width: 40%;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.container i
+	{
+	top: 50%;
+	height: 50px;
+	width: 50px;
+	cursor: pointer;
+	font-size: 1.25rem;
+	position: absolute;
+	text-align: center;
+	line-height: 50px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+	transform: translateY(-50%);
+	transition: transform 0.1s linear;
+}
+
+.container i:first-child {
+	left: -100px;
+}
+
+.container i:last-child {
+	right: -100px;
+}
+
+.container .carousel {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: calc((100% / 3) - 12px);
+	overflow-x: auto;
+	gap: 1px;
+	border-radius: 10px;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+	position: relative;
+}
+
+.carousel  {
+	display: none;
+}
+
+.carousel.no-transition {
+	scroll-behavior: auto;
+}
+
+/*Carousel items*/
+.carousel .card {
+	position: relative;
+	width: 200px;
+	/* Fixed width */
+	height: 200px;
+	/* Fixed height */
+	margin: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.carousel .card .img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border: 4px solid #fff;
+}
+
+.carousel .card h2 {
+	font-weight: 500;
+	font-size: 1.56rem;
+	margin: 30px 0 5px;
+}
+
+.carousel .card span {
+	color: #6A6D78;
+	font-size: 1.31rem;
+}
+
+.carousel .card .boxcontent {
+	position: absolute;
+	bottom: 10%;
+	left: 0;
+	right: 0;
+	padding: 15px;
+	background-color: #edffef;
+	color: #182f32;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.carousel .card:hover .boxcontent {
+	opacity: 1;
+}
+
+.carousel .card h3 {
+	font-size: 20px;
+	margin-top: 0;
+	margin-bottom: 10px;
+	color: #213032;
+}
+
+.card p {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.carousel .card button {
+	position: relative;
+	background-color: #213032;
+	color: #fff;
+	text-decoration: none;
+	border: 2px solid black;
+	font-weight: bold;
+	transition: background-color 0.4s, color 0.4s, border 0.4s;
+	padding: 13px 30px;
+}
+
+.carousel .card button:hover {
+	background-color: #97a2a3;
+	color: #213032;
+	border: 2px solid black;
+	cursor: pointer;
+}
+
+.carousel .view {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: black;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.carousel .view:hover {
+	background-color: grey;
+}
+
+/*All Recipes Section General CSS*/
+.allrecipes {
+	width: 100%;
+	padding: 30px 0px 30px;
+	background-color: #314e52;
+	margin: 0px;
+}
+
+/*All recipes section CSS for the boxes*/
+.box {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.card {
+	position: relative;
+	width: 200px;
+	/* Fixed width */
+	height: 200px;
+	/* Fixed height */
+	margin: 10px;
+	border: 2px solid black;
+	border-radius: 50%;
+	/* Make border-radius 50% to create a circular shape */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.box .card img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.box .card .boxcontent {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 40px;
+	background-color: #edffef;
+	color: #182f32;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.box .card:hover {
+	transform: scale(1.2)
+}
+
+.box .card:hover .boxcontent {
+	opacity: 1;
+}
+
+.card h3 {
+	font-size: 20px;
+	margin-top: 0;
+	margin-bottom: 10px;
+	color: #213032;
+}
+
+.box .card p {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.box .card button {
+	position: relative;
+	background-color: #213032;
+	color: #fff;
+	text-decoration: none;
+	border: 2px solid black;
+	font-weight: bold;
+	transform: 1s;
+	padding: 13px 30px;
+}
+
+.box .card button:hover {
+	background-color: #97a2a3;
+	color: #213032;
+	border: 2px solid black;
+	cursor: pointer;
+}
+
+/*Contribution Form Section CSS*/
+.contribute {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 120px;
+	background: #acb4b5;
+}
+
+.contribute button {
+	background-color: #213032;
+	color: #fff;
+	border: 2px solid black;
+	padding: 30px 30px 30px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.contribute .view:hover {
+	background-color: grey;
+}
+
+/* Footer CSS*/
+footer {
+	padding: 20px 0;
+	background: #acb4b5;
+  color: black;
+  text-align: center;
+}
+
+footer h5 {
+	font-size: 25px;
+	margin-top: 10px;
+	text-align: center;
+
+}
+
+/*Helpful tips*/
+
+
+.advicesection {
+	padding: 30px 0;
+	background-color: grey;
+}
+
+.adviceslider {
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	position: relative;
+}
+
+.advicelist {
+	display: flex;
+	transition: transform 0.5s ease-in-out;
+}
+
+.adviceitem {
+	min-width: 300px;
+	height: auto;
+	margin-right: 20px;
+	padding: 10px;
+	border-radius: 0px;
+	background-color: #f9f9f9;
+	text-align: center;
+	border: 4px solid darkgrey;
+}
+
+.adviceitem img {
+	max-width: 100%;
+	height: 100px;
+	width: 135px;
+	border-radius: 5px;
+	align-items: center;
+}
+
+.adviceitem h3 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.adviceitem p {
+	text-align: center;
+}
+
+.adviceitem .full-text {
+	display: none;
+}
+
+.adviceitem .read-more {
+	color: rgb(110, 68, 5);
+	text-decoration: none;
+}
+
+.adviceitem a:hover {
+	text-decoration: underline;
+}
