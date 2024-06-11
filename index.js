@@ -1,6 +1,6 @@
 /* JavaScript functionality for the home page */
 
-function homePageFunctions() {
+function footerFunctions() {
     const copyToClipboard = (platform) => {
         const url = window.location.href;
         const dummy = document.createElement("textarea");
@@ -40,4 +40,4 @@ function homePageFunctions() {
     initializeShareLinks();
 }
 
-document.addEventListener("DOMContentLoaded", homePageFunctions);
+document.addEventListener("DOMContentLoaded", footerFunctions);
