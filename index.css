@@ -66,7 +66,7 @@ header {
 /*Featured recipes carousel - also on helpful tips container*/
 .container {
 	max-width: fit-content;
-	width: 40%;
+	width: 48%;
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
@@ -340,60 +340,65 @@ footer h5 {
 /*Helpful tips*/
 
 
+/* Advice Section */
 .advicesection {
-	padding: 30px 0;
-	background-color: grey;
+    padding: 30px 0;
+    background-color: grey;
 }
 
+/* Advice Slider */
 .adviceslider {
-	display: flex;
-	align-items: center;
-	overflow: hidden;
-	position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
 }
 
+/* Advice List */
 .advicelist {
-	display: flex;
-	transition: transform 0.5s ease-in-out;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
 }
 
+/* Advice Item */
 .adviceitem {
-	min-width: 300px;
-	height: auto;
-	margin-right: 20px;
-	padding: 10px;
-	border-radius: 0px;
-	background-color: #f9f9f9;
-	text-align: center;
-	border: 4px solid darkgrey;
+    min-width: 300px; /* Ensure each item has a fixed width */
+    height: auto;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 0px;
+    background-color: rgb(200, 200, 200);
+    text-align: center;
+    border: none;
 }
 
 .adviceitem img {
-	max-width: 100%;
-	height: 100px;
-	width: 135px;
-	border-radius: 5px;
-	align-items: center;
+    max-width: 100%;
+    height: 140px;
+    width: 150px;
+    border-radius: 5px;
+    align-items: center;
+	border-radius: 6px;
 }
 
 .adviceitem h3 {
-	margin-top: 10px;
-	margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .adviceitem p {
-	text-align: center;
+    text-align: center;
 }
 
 .adviceitem .full-text {
-	display: none;
+    display: none;
 }
 
 .adviceitem .read-more {
-	color: rgb(110, 68, 5);
-	text-decoration: none;
+    color: rgb(110, 68, 5);
+    text-decoration: none;
 }
 
 .adviceitem a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
