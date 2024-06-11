@@ -1,0 +1,141 @@
+/* Styles sheet for the home page or any page with shared styles */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.footer-container div {
+    flex: 1;
+    margin: 10px;
+    max-width: 200px;
+}
+
+.footer-container h3 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.footer-container p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.footer-container a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    display: block;
+    margin: 10px 0;
+}
+
+.email-link {
+    white-space: nowrap;
+}
+
+.footer-container img {
+    max-width: 100px;
+    margin: 0 auto 10px auto;
+    display: block;
+}
+
+.logo-center {
+    text-align: center;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    background-size: 24px 24px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    z-index: 0; 
+    transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease, background-color 0.3s ease;
+}
+
+.icon:hover::before {
+    width: 40px; 
+    height: 40px;
+    top: 0;
+    left: 0;
+}
+
+.icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+}
+
+.facebook {
+    background-image: url('images/facebook_icon.png'); 
+}
+
+.instagram {
+    background-image: url('images/instagram_icon.png'); 
+}
+
+.twitter {
+    background-image: url('images/twitter_icon.png'); 
+}
+
+.youtube {
+    background-image: url('images/youtube_icon.png'); 
+}
+
+.facebook:hover::before {
+    background-color: rgb(21, 72, 184);
+}
+
+.instagram:hover::before {
+    background-color: rgb(225, 48, 107);
+}
+
+.twitter:hover::before {
+    background-color: rgb(0, 0, 0);
+}
+
+.youtube:hover::before {
+    background-color: rgb(228, 3, 3);
+}
