@@ -109,19 +109,19 @@ footer {
 }
 
 .facebook {
-    background-image: url('Footer_Images/Facebook_png.png'); 
+    background-image: url('images/facebook_icon.png'); 
 }
 
 .instagram {
-    background-image: url('Footer_Images/instagram_png_2.png'); 
+    background-image: url('images/instagram_icon.png'); 
 }
 
 .twitter {
-    background-image: url('Footer_Images/twitter_png.png'); 
+    background-image: url('images/twitter_icon.png'); 
 }
 
 .youtube {
-    background-image: url('Footer_Images/Youtube_png.png'); 
+    background-image: url('images/youtube_icon.png'); 
 }
 
 .facebook:hover::before {
