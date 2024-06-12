@@ -2,15 +2,16 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Change the background color of the body */
+    background-color: #314e52;
 }
 
 #recipes {
     padding: 20px;
 }
 
-h2 {
+h1 {
     text-align: center;
+    color: #edffef;
 }
 
 .recipe-list {
@@ -29,8 +30,9 @@ h2 {
     margin: 20px;
     width: 80%;
     max-width: 600px;
-    background-color: #fff; /* Different color from the body background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    height: 340px;
+    background-color: rgb(200, 200, 200); /* Different color from the body background */
+    box-shadow: 0 4px 8px rgba(14, 14, 14, 0.381); /* Add shadow */
     transition: transform 0.3s;
     text-decoration: none;
     color: black;
@@ -51,6 +53,7 @@ h2 {
 .recipe-item img {
     width: 100%;
     height: auto;
+    align-items: center;  
     border-radius: 10px;
     margin-bottom: 10px;
 }
