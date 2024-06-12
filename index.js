@@ -217,8 +217,8 @@ function homePageFunctions() {
     });
 
     contributeButton.addEventListener('click', function() {
-        window.location.href = 'contribute.html'; // Navigate to contributionForm.html
-    });
+    const dataLink = contributeButton.getAttribute('data-link');
+    window.location.href = dataLink;
 }
 
 // Call the homePageFunctions when DOM is loaded
