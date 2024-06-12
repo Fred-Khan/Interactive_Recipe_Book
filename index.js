@@ -205,15 +205,15 @@ function homePageFunctions() {
     const contributeButton = document.getElementById('contributeButton');
     
     breakfastButton.addEventListener('click', function() {
-        window.location.href = 'recipelist.html'; // Navigate to breakfast.html
+        window.location.href = 'breakfastList.html'; // Navigate to breakfast.html
     });
     
     lunchButton.addEventListener('click', function() {
-        window.location.href = 'lunch.html'; // Navigate to lunch.html
+        window.location.href = 'lunchList.html'; // Navigate to lunch.html
     });
     
     dinnerButton.addEventListener('click', function() {
-        window.location.href = 'dinner.html'; // Navigate to dinner.html
+        window.location.href = 'dinnerlist.html'; // Navigate to dinner.html
     });
 
     contributeButton.addEventListener('click', function() {
