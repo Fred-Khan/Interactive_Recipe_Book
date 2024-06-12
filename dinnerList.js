@@ -2,7 +2,7 @@
 
 // Sample recipe data
 const recipes = [
-    { id: 1, title: 'Pancakes', image: 'pancakes.jpg', link: 'pancakes.html' },
+    { id: 1, title: 'Chicken With Apricot', image: 'recipe-chicken-with-apricot 8.jpg', link: 'recipe-chicken-with-apricot.html' },
     { id: 2, title: 'Salad', image: 'salad.jpg', link: 'salad.html' },
     { id: 3, title: 'Pizza', image: 'pizza.jpg', link: 'pizza.html' },
     // Add more recipes as needed
