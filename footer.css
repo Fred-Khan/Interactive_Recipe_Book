@@ -124,18 +124,18 @@ footer {
     background-image: url('images/youtube_icon.png'); 
 }
 
-.facebook:hover::before {
+.facebook:hover {
     background-color: rgb(21, 72, 184);
 }
 
-.instagram:hover::before {
+.instagram:hover {
     background-color: rgb(225, 48, 107);
 }
 
-.twitter:hover::before {
+.twitter:hover {
     background-color: rgb(0, 0, 0);
 }
 
-.youtube:hover::before {
+.youtube:hover {
     background-color: rgb(228, 3, 3);
 }
