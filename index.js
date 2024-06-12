@@ -217,7 +217,8 @@ function homePageFunctions() {
     });
 
     contributeButton.addEventListener('click', function() {
-        window.location.href = 'contribute.html'; // Navigate to contributionForm.html
+        const datalink = contributeButton.getAttribute("data-link");
+        window.location.href = datalink; // Navigate to Submission_Form.html
     });
 }
 
