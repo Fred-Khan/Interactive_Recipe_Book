@@ -105,7 +105,8 @@ function homePageFunctions() {
             { title: 'How to poach eggs easily', image: 'images/tips4.jpg', text: 'Three easy ways to poach eggs! Learn how to poach eggs using the whirlpool method, in a frypan and in the oven and how much time it takes to perfectly poach eggs. Plus get more tips about how to poach eggs without vinegar and lots of recipes with poached eggs', link: '#' },
             { title: 'The best fluffy pancake recipe', image: 'images/tips5.jpg', text: 'Stale old ingredients such as flour and baking powder won’t give you the best pancakes. Check your baking powder is in date, old baking powder quickly loses its raising power, and you’ll end up with dense, flat pancakes.', link: '#' },
             { title: 'The different types of rice', image: 'images/tips6.jpg', text: 'Discover the different types of rice. A guide to basmati rice, arborio risotto rice, jasmine rice, koshihikari sushi rice, spanish rice, wild rice and parboiled rice. Also find out what the difference is between short grain, medium grain and long grain rice, and what the difference is between white rice and brown rice.', link: '#' },
-            { title: 'Which potatoes are best for roasting, mashing, baking and more', image: 'images/tips7.jpg', text: 'Potatoes are a fantastic kitchen staple that can be cooked in so many delicious ways, but when it comes to choosing the perfect potato for your mash, roast, stew or salad, do you know which is best? Find out the difference between waxy and floury potatoes, as well as the best varieties to choose for mashing, baking, roasting and more.', link: '#' }
+            { title: 'Which potatoes are best for roasting, mashing, baking and more', image: 'images/tips7.jpg', text: 'Potatoes are a fantastic kitchen staple that can be cooked in so many delicious ways, but when it comes to choosing the perfect potato for your mash, roast, stew or salad, do you know which is best? Find out the difference between waxy and floury potatoes, as well as the best varieties to choose for mashing, baking, roasting and more.', link: '#' },
+            { title: 'How to freeze ham', image: 'images/tips8.jpg', text: 'Slice ham off the bone. Divide into smaller serving sizes. Wrap in in foil, followed by cling film. Place into a freezer bag or sealable container. Label and date. Freeze', link: '#' }
         ],
         containerId: 'advicelist'
     };
@@ -161,24 +162,41 @@ function homePageFunctions() {
         }
     }
 
-    const adviceListContainer = document.getElementById('advicelist');
+    const adviceListContainer = document.querySelector('.advicelist');
     const slidePrevBtn = document.getElementById('slideprev');
     const slideNextBtn = document.getElementById('slidenext');
     
     let currentPosition = 0;
-    const slideWidth = adviceListContainer.offsetWidth;
+    const adviceItems = document.querySelectorAll('.adviceitem');
+    const adviceItemWidth = adviceItems[0].offsetWidth + parseInt(window.getComputedStyle(adviceItems[0]).marginRight, 10);
+    const maxPosition = 0;
+    const minPosition = -(adviceItems.length - 1) * adviceItemWidth;
     
     slidePrevBtn.addEventListener('click', () => {
-      currentPosition += slideWidth / 5; // Adjust this value to make the slider move slower
-      currentPosition = Math.min(currentPosition, 0);
-      adviceListContainer.style.transform = `translateX(${currentPosition}px)`;
+        if (currentPosition < maxPosition) {
+            currentPosition += adviceItemWidth;
+            adviceListContainer.style.transform = `translateX(${currentPosition}px)`;
+        }
+        updateButtonStates();
     });
     
     slideNextBtn.addEventListener('click', () => {
-      currentPosition -= slideWidth / 5; // Adjust this value to make the slider move slower
-      currentPosition = Math.max(currentPosition, -((adviceListContainer.children.length - 1) * slideWidth));
-      adviceListContainer.style.transform = `translateX(${currentPosition}px)`;
+        if (currentPosition > minPosition) {
+            currentPosition -= adviceItemWidth;
+            adviceListContainer.style.transform = `translateX(${currentPosition}px)`;
+        }
+        updateButtonStates();
     });
+    
+    function updateButtonStates() {
+        slidePrevBtn.disabled = currentPosition >= maxPosition;
+        slideNextBtn.disabled = currentPosition <= minPosition;
+    }
+    
+    // Initial update to set button states correctly
+    updateButtonStates();
+    
+    
 
     // Event listeners for breakfast, lunch and dinner buttons
     const breakfastButton = document.getElementById('breakfastButton');
