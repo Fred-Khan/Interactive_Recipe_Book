@@ -1,0 +1,138 @@
+@media (max-width: 600px) {
+    form {
+        align-items: center;
+    }
+
+    #submit-recipe {
+        align-self: center;
+        margin-top: 20px;
+    }
+
+    .form-section { /* Set flex-direction to column on smaller screens */
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+form {
+    max-width: 1200px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Stretch to fit the container width */
+}
+
+.form-section {
+    display: flex; /* Added: Set this to flex to utilize flexbox */
+    flex-direction: column; /* Column direction by default */
+    flex-wrap: wrap; /* Added: Wrap child items */
+    justify-content: space-between; /* Added: Set space evenly between children */
+    border: 1px solid #dddddd;
+    margin: 10px;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+/* Target only the first form-section for the horizontal layout */
+.form-section:first-child {
+    flex-direction: row; /* Row direction for the first child */
+    align-items: center; /* Vertically align the child elements in the center */
+}
+
+.form-section:first-child > .form-inputs,
+.form-section:first-child > .image-preview {
+    flex: 1 0 200px;
+    margin: 10px;
+}
+
+
+.input-group {
+    margin-bottom: 3px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input, .input-group textarea {
+    width: 100%;
+    height: 50px; /* Adjust this according to your preference */
+}
+
+#title, #author {
+    height: 30px;
+}
+#description {
+    height: 80px;
+}
+
+ol.non-numbered {
+    list-style-type: none;
+}
+ol.non-numbered li:before {
+    content: "- "; /* Add dash before each item */
+}
+/* Hide the delete button by default */
+.delete-button {
+    display: none;
+}
+/* Show the delete button when its parent <li> element is hovered over */
+li:hover .delete-button {
+    display: inline-block;
+}
+/* Add these lines */
+li div, li button {
+    display: inline-block;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Located at the top */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+}
+
+/* Modal Content appears when the user hits Submit for the form, requiring they review and confirm their data */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#submit-recipe {
+    max-width: 200px;
+    align-self: flex-end;
+    margin-top: 20px;
+}
