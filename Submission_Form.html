@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @media (max-width: 600px) {
+            form {
+                align-items: center;
+            }
+
+            #submit-recipe {
+                align-self: center;
+                margin-top: 20px;
+            }
+
+            .form-section { /* Set flex-direction to column on smaller screens */
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+
+        form {
+            max-width: 1200px;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch; /* Stretch to fit the container width */
+        }
+
+        .form-section {
+            display: flex; /* Added: Set this to flex to utilize flexbox */
+            flex-direction: column; /* Column direction by default */
+            flex-wrap: wrap; /* Added: Wrap child items */
+            justify-content: space-between; /* Added: Set space evenly between children */
+            border: 1px solid #dddddd;
+            margin: 10px;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        /* Target only the first form-section for the horizontal layout */
+        .form-section:first-child {
+            flex-direction: row; /* Row direction for the first child */
+            align-items: center; /* Vertically align the child elements in the center */
+        }
+
+        .form-section:first-child > .form-inputs,
+        .form-section:first-child > .image-preview {
+            flex: 1 0 200px;
+            margin: 10px;
+        }
+
+
+        .input-group {
+            margin-bottom: 3px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            height: 50px; /* Adjust this according to your preference */
+        }
+
+        #title, #author {
+            height: 30px;
+        }
+        #description {
+            height: 80px;
+        }
+
+        ol.non-numbered {
+            list-style-type: none;
+        }
+        ol.non-numbered li:before {
+            content: "- "; /* Add dash before each item */
+        }
+        /* Hide the delete button by default */
+        .delete-button {
+            display: none;
+        }
+        /* Show the delete button when its parent <li> element is hovered over */
+        li:hover .delete-button {
+            display: inline-block;
+        }
+        /* Add these lines */
+        li div, li button {
+            display: inline-block;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Located at the top */
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+        }
+
+        /* Modal Content appears when the user hits Submit for the form, requiring they review and confirm their data */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #submit-recipe {
+            max-width: 200px;
+            align-self: flex-end;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- The Modal -->
+<div id="submit-modal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modal-text"></p>
+        <button id="confirm-submit">Confirm</button>
+    </div>
+
+</div>
+
+<form>
+    <div class="form-section">
+        <div class="form-inputs">
+            <div class="input-group">
+                <label for="title">Recipe Title</label>
+                <input type="text" id="title"  maxlength="400">
+            </div>
+            <div class="input-group">
+                <label for="author">Author</label>
+                <input type="text" id="author" maxlength="300">
+            </div>
+            <div class="input-group">
+                <label for="description">Recipe Description [1200 char max]</label>
+                <textarea id="description" maxlength="1200"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label for="image-upload">Image Upload</label>
+                <input type="file" id="image-upload" accept="image/*">
+            </div>
+            <div class="input-group">
+                <label for="image-url">Or Image URL</label>
+                <input type="url" id="image-url">
+            </div>
+        </div>
+
+        <div class="image-preview">
+            <img id="image-preview" style="max-width: 100%;">
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h3>Ingredients</h3>
+        <div class="input-group">
+            <label for="ingredient-input">Add ingredient</label>
+            <input type="text" id="ingredient-input"  maxlength="10000">
+            <button onClick="addIngredient(event)">Add</button>
+        </div>
+
+        <ol id="ingredient-list" class="non-numbered">
+            <!-- Here is where you will add/delete ingredients dynamically. -->
+        </ol>
+    </div>
+
+    <div class="form-section">
+        <h3>Steps</h3>
+        <div class="input-group">
+            <label for="step-input">Add step</label>
+            <input type="text" id="step-input"  maxlength="10000">
+            <button onClick="addStep(event)">Add</button>
+        </div>
+
+        <ol id="step-list">
+            <!-- Here is where you will add/delete steps dynamically. -->
+        </ol>
+    </div>
+
+    <button id="submit-recipe">Submit Recipe</button>
+</form>
+<script>
+    let recipe = {
+        author: "",
+        recipeTitle: "",
+        recipeDescription: "",
+        duration: 0,
+        steps: 0,
+        _ingredients: [],
+        _ingredientsRaw: [],
+        _steps: [],
+        _stepsRaw: []
+    }
+
+
+
+    function setUpImageUploadEvents() {
+        // image upload handling
+        document.getElementById('image-upload').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                document.getElementById('image-preview').src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }, false);
+
+        // image url handling
+        document.getElementById('image-url').addEventListener('input', function (event) {
+            var url = event.target.value;
+            document.getElementById('image-preview').src = url;
+        }, false);
+    }
+    function setUpSubmitRecipeEvent() {
+
+        const modal = document.getElementById("submit-modal");
+        const span = document.getElementsByClassName("close")[0];
+        const modalText = document.getElementById("modal-text");
+        const confirmSubmit = document.getElementById("confirm-submit");
+
+        confirmSubmit.addEventListener("click", function () {
+            modal.style.display = "none";
+            recipe.recipeTitle = sanitize(recipe.recipeTitle);
+            recipe.author = sanitize(recipe.author);
+            recipe.recipeDescription = sanitize(recipe.recipeDescription);
+            alert("Submission sent");
+        });
+
+        let submit = document.getElementById("submit-recipe");
+        submit.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            recipe.recipeTitle = document.getElementById("title").value;
+            recipe.author = document.getElementById("author").value;
+            recipe.recipeDescription = document.getElementById("description").value;
+
+            if (recipe.recipeTitle && recipe.author && recipe.recipeDescription && recipe._ingredients.length && recipe._steps.length) {
+                modalText.innerHTML = "";
+
+                // Create an img element and set its src attribute to the image source in the preview section
+                let img = document.createElement("img");
+                img.src = document.getElementById("image-preview").src;
+                img.style.width = "100%"; // or another desired width
+                modalText.appendChild(img);
+
+                let title = document.createElement('h2');
+                title.innerHTML = recipe.recipeTitle;
+                modalText.appendChild(title);
+
+                let authorP = document.createElement('p');
+                authorP.innerHTML = "By: " + recipe.author;
+                modalText.appendChild(authorP);
+
+                let descP = document.createElement('p');
+                descP.innerHTML = recipe.recipeDescription;
+                modalText.appendChild(descP);
+
+                let ingredientsLabel = document.createElement('h3');
+                ingredientsLabel.textContent = "Ingredients:";
+                modalText.appendChild(ingredientsLabel);
+
+                let ingredientsUl = document.createElement('ul');
+
+                recipe._ingredients.forEach(ingredient => {
+                    let li = document.createElement('li');
+                    li.innerHTML = ingredient; // <- changed
+                    ingredientsUl.appendChild(li);
+                });
+
+                modalText.appendChild(ingredientsUl);
+
+                let stepsLabel = document.createElement('h3');
+                stepsLabel.textContent = "Steps:";
+                modalText.appendChild(stepsLabel);
+
+                let stepsOl = document.createElement('ol');
+
+                recipe._steps.forEach(step => {
+                    let li = document.createElement('li');
+                    li.innerHTML = step; // <- changed
+                    stepsOl.appendChild(li);
+                });
+
+                modalText.appendChild(stepsOl);
+
+                confirmSubmit.style.display = "inline-block";
+            } else {
+                modalText.textContent = "Please fill all the fields";
+
+                confirmSubmit.style.display = "none";
+            }
+
+            modal.style.display = "block";
+
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+        });
+
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+    function setUpKeyDownEvents() {
+        document.getElementById("ingredient-input").addEventListener("keydown", function(event){
+            if(event.key === "Enter") {
+                event.preventDefault(); // to prevent form submission on enter
+                addIngredient(event);
+            }
+        });
+        document.getElementById("step-input").addEventListener("keydown", function(event){
+            if(event.key === "Enter") {
+                event.preventDefault(); // to prevent form submission on enter
+                addStep(event);
+            }
+        });
+    }
+
+    setUpSubmitRecipeEvent();
+    setUpKeyDownEvents();
+    setUpImageUploadEvents();
+
+    //set up complete
+
+
+
+    function addIngredient(event) {
+        addToList(event, "ingredient-input", "ingredient-list", recipe._ingredients, recipe._ingredientsRaw);
+    }
+    function addStep(event) {
+        addToList(event, "step-input", "step-list", recipe._steps, recipe._stepsRaw);
+    }
+
+    function addToList(event, inputElementId, listElementId, listArray, listArrayRaw) {
+        event.preventDefault();
+        let input = document.getElementById(inputElementId).value;
+
+        //Check if the input value is not empty or white spaces
+        if(input.trim().length > 0){
+            let listDisplay = document.getElementById(listElementId);
+            let newListEntry = processInput(input);
+            listArray.push(newListEntry);
+            listArrayRaw.push(input);
+            updateListDisplay(listArray, listDisplay);
+        }
+    }
+
+    function updateListDisplay(listObject, listElement){
+        // recreate a list from scratch provided the data object that represents it
+        listElement.innerHTML = "";
+        for(let i = 0; i < listObject.length; i++)
+        {
+            let li = document.createElement('li');
+            let div = document.createElement('div');  // Create a container
+            div.innerHTML = listObject[i];            // Put your content in the container
+            div.contentEditable = "true";             // Make only the container editable
+
+            let deleteButton = document.createElement('button');
+            deleteButton.innerHTML = 'Delete';
+            deleteButton.className = 'delete-button'; // Add class name to the delete button
+            deleteButton.addEventListener('click', function(){
+                listObject.splice(i, 1); // Remove this item from your array
+                updateListDisplay(listObject, listElement); // Re-render the list
+            });
+
+            li.appendChild(div);       // Add the container to your list item
+            li.appendChild(deleteButton); // Add the delete button to your list item (not inside the container)
+            listElement.appendChild(li);
+        }
+    }
+
+    function processInput(input) {
+        // Prevent code injection
+        input = sanitize(input);
+
+
+
+        // Replace fractions
+        let fractions = {
+            '1/2': '½',
+            '1/3': '⅓',
+            '2/3': '⅔',
+            '1/4': '¼',
+            '3/4': '¾',
+            '1/5': '⅕',
+            '2/5': '⅖',
+            '3/5': '⅗',
+            '4/5': '⅘',
+            '1/6': '⅙',
+            '5/6': '⅚',
+            '1/8': '⅛',
+            '3/8': '⅜',
+            '5/8': '⅝',
+            '7/8': '⅞'
+        };
+        Object.keys(fractions).forEach((key) => {
+            // This will replace all fractions found in the string using regex
+            let regex = new RegExp(key, 'g');
+            input = input.replace(regex, fractions[key]);
+        });
+
+
+
+        // emphasize special terms
+        let cookingTerms = ["braise", "poach", "caramelize", "sear", "saute", "deglaze", "emulsify", "flambe",
+            "rehydrate", "parboil", "puree", "roast", "scald", "truss", "zest", "julienne", "marinate", "broil",
+            "blanch", "fillet", "brine", "confection", "garnish", "infuse", "temper", "whip", "knead"];
+
+        cookingTerms.forEach((term) => {
+            let regex = new RegExp(`\\b${term}\\b`, 'gi');
+            input = input.replace(regex, `<em>${term}</em>`);
+        });
+
+
+
+
+        // Detect and properly format temperatures
+        let tempFormats = ['C', 'F'];
+
+        tempFormats.forEach((tempFormat) => {
+            let regex = new RegExp(`(\\d+)\\s*°?\\s*${tempFormat}\\b`, 'gi');
+            input = input.replace(regex, (match, p1) => `${p1}°${tempFormat}`);
+        });
+
+
+        // Provide conversions in a tooltip for each temperature detected with the degree symbol
+        let celsius = { abbr: 'C', conversion: (v) => (v * 9/5) + 32, tooltip: 'Fahrenheit' };
+        let fahrenheit = { abbr: 'F', conversion: (v) => (v - 32) * 5/9, tooltip: 'Celsius' };
+
+        let temps = [celsius, fahrenheit];
+
+        temps.forEach((temp) => {
+            let regex = new RegExp(`(-?\\d+)\\s*°\\s*${temp.abbr}\\b`, 'gi');
+            input = input.replace(regex, (match, p1) => {
+                let convertedTemp = temp.conversion(Number(p1)).toFixed(0);
+                let formattedTemp = `${p1}°${temp.abbr}`;
+                let tooltipTemp = `${convertedTemp}°${temp.tooltip}`;
+                return `<abbr title="${tooltipTemp}">${formattedTemp}</abbr>`;
+            });
+        });
+
+
+
+        // Bold measurement units
+        let units = [
+            { abbr: 'tsp', full: 'Teaspoon' },
+            { abbr: 'Tbs', full: 'Tablespoon' },
+            { abbr: 'tbsp', full: 'Tablespoon' },
+            { abbr: 'fl oz', full: 'Fluid Ounce' },
+            { abbr: 'pt', full: 'Pint' },
+            { abbr: 'qt', full: 'Quart' },
+            { abbr: 'gal', full: 'Gallon' },
+            { abbr: 'mL', full: 'Milliliter' },
+            { abbr: 'ml', full: 'Milliliter' },
+            { abbr: 'L', full: 'Liter' },
+            { abbr: 'g', full: 'Gram' },
+            { abbr: 'kg', full: 'Kilogram' },
+            { abbr: 'oz', full: 'Ounce' },
+            { abbr: 'lb', full: 'Pound' },
+            { abbr: 'pch', full: 'Pinch' },
+            { abbr: 'ds', full: 'Dash' },
+            { abbr: 'smid', full: 'Smidgen' },
+            { abbr: 'dr', full: 'Drop' },
+            { abbr: 'ssp', full: 'Saltspoon/spoonful' },
+            { abbr: 'csp', full: 'Coffeespoon' },
+            { abbr: 'dsp', full: 'Dessert Spoon' },
+            { abbr: 'wgf', full: 'Wineglass' },
+            { abbr: 'gi', full: 'Gills' },
+            { abbr: 'pk', full: 'Peck' },
+            { abbr: 'pcs', full: 'Piece' },
+            { abbr: 'sl', full: 'Slice' },
+            { abbr: 'bn', full: 'Bunch' },
+            { abbr: 'hd', full: 'Head (for lettuce)' },
+            { abbr: 'cl', full: 'Clove (for garlic)' },
+            { abbr: 'sp', full: 'Sprig (for herbs)' }
+        ];
+
+        units.forEach((unit) => {
+            let regex = new RegExp(`((^|\\W)|\\d)(${unit.abbr}s?(?![a-zA-Z]))`, 'gi');
+            input = input.replace(regex, `$1<abbr title="${unit.full}"><strong>$3</strong></abbr>`);
+        });
+
+
+        return input;
+    }
+
+    function sanitize(input) {
+        let temp = document.createElement('div');
+        temp.textContent = input;
+        return temp.innerHTML;
+    }
+</script>
+</body>
+</html>
