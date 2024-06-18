@@ -4,7 +4,7 @@
 const recipes = [
     { id: 1, title: 'Chicken With Apricot', image: 'images/recipe-chicken-with-apricot.jpg', link: 'recipe-chicken-with-apricot.html' },
     { id: 2, title: 'Salad', image: 'salad.jpg', link: 'salad.html' },
-    { id: 3, title: 'Pizza', image: 'pizza.jpg', link: 'pizza.html' },
+    { id: 3, title: 'Pizza', image:     'pizza.jpg', link: 'pizza.html' },
     // Add more recipes as needed
 ];
 
