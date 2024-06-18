@@ -6,12 +6,13 @@ body {
 }
 
 #recipes {
-    padding: 20px;
+    padding: 10px;
 }
 
 h1 {
     text-align: center;
     color: #edffef;
+   
 }
 
 .recipe-list {
@@ -26,11 +27,11 @@ h1 {
     align-items: flex-start;
     border: 1px solid #ccc;
     border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    width: 80%;
-    max-width: 600px;
-    height: 340px;
+    padding: 5px;
+    margin: 10px;
+    width: 70%;
+    max-width: 550px;
+    height: 360px;
     background-color: rgb(200, 200, 200); /* Different color from the body background */
     box-shadow: 0 4px 8px rgba(14, 14, 14, 0.381); /* Add shadow */
     transition: transform 0.3s;
@@ -51,11 +52,11 @@ h1 {
 }
 
 .recipe-item img {
-    width: 100%;
+    width: 80%;
     height: auto;
     align-items: center;  
-    border-radius: 10px;
-    margin-bottom: 10px;
+    border-radius: 20px;
+    margin-bottom: 0px;
 }
 
 .recipe-actions {
@@ -63,10 +64,19 @@ h1 {
     justify-content: flex-start; /* Align elements to the left */
     width: 100%;
     align-items: center;
+    margin: 10px;
 }
 
-button, .favorite {
-    margin-right: 10px;
-    padding: 5px 10px;
+button { 
+    margin-left: 10px;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    background-color:rgba(241, 119, 131, 0.263);
+}
+.favorite{
+    margin-right: 20px;
+    padding: 10px 10px;
     cursor: pointer;
 }
