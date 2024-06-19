@@ -14,11 +14,53 @@
     }
 }
 
+/* General CSS and shared styles from index CSS */
+* { padding: 0; margin: 0; box-sizing: border-box; font-family: 'Josefin Sans', sans-serif; }
+
 body {
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
+    background-color: grey;
+}
+
+.container {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align to start to prevent stretching full height */
+    min-height: calc(100vh - 200px); /* Remove this line if you do not want footer stuck to bottom */
+    flex-direction: column; /* Align children vertically */
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px;
+    background: #acb4b5; /* From #header in index.css */
+    text-align: center;
+}
+
+/* Combining Footer styles */
+footer {
+    width: 100%;
+    padding: 60px;
+    background: #acb4b5;
+    color: black;
+    text-align: center;
+    background: #acb4b5; /* From #footer in index.css */
+    color: #edffef; /* From footer h5 in index.css */
+}
+
+footer h5 {
+    font-size: 25px;
+    margin-top: 10px;
+    text-align: center;
+    color: #edffef; /* From footer h5 in index.css */
 }
 
 form {
@@ -34,11 +76,11 @@ form {
     flex-direction: column; /* Column direction by default */
     flex-wrap: wrap; /* Added: Wrap child items */
     justify-content: space-between; /* Added: Set space evenly between children */
-    border: 1px solid #dddddd;
+    /*border: 1px solid #dddddd;*/
     margin: 10px;
     padding: 20px;
     overflow-y: auto;
-    max-height: 90vh;
+    max-height: 80vh;
 }
 
 /* Target only the first form-section for the horizontal layout */
@@ -52,7 +94,21 @@ form {
     flex: 1 0 200px;
     margin: 10px;
 }
-
+.form-section:nth-child(9n+1) {
+    background-color: #97a2a3;
+}
+.form-section:nth-child(9n+2) {
+    background-color: #182f32;
+}
+.form-section:nth-child(9n+3) {
+    background-color: #314e52;
+}
+.form-section:nth-child(9n+4) {
+    background-color: #acb4b5;
+}
+.form-section:nth-child(9n+5) {
+    background-color: #213032;
+}
 
 .input-group {
     margin-bottom: 3px;
@@ -61,6 +117,7 @@ form {
 .input-group label {
     display: block;
     margin-bottom: 5px;
+    color: #edffef; /* From h2 in index.css */
 }
 
 .input-group input, .input-group textarea {
@@ -92,6 +149,7 @@ li:hover .delete-button {
 /* Add these lines */
 li div, li button {
     display: inline-block;
+    
 }
 
 /* The Modal (background) */
@@ -99,7 +157,6 @@ li div, li button {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Located at the top */
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
@@ -131,8 +188,31 @@ li div, li button {
     cursor: pointer;
 }
 
+
 #submit-recipe {
     max-width: 200px;
     align-self: flex-end;
     margin-top: 20px;
+    background-color: #213032; /* From .contribute button in index.css */
+    color: #edffef; /* From .contribute button in index.css */
+
+    border: 2px solid black;
+    padding: 30px 30px 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#submit-recipe .view:hover{
+    background-color: grey;
+}
+
+.add-button {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #213032;
+    color: #edffef;
+    border: 2px solid black;
+    font-size: 16px; /* Adjust as needed, made it smaller as they are not as important as submit button */
+    cursor: pointer;
+    text-align: center;
 }
