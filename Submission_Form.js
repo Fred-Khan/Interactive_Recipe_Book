@@ -219,22 +219,25 @@
 };
     Object.keys(fractions).forEach((key) => {
     // This will replace all fractions found in the string using regex
-    let regex = new RegExp(key, 'g');
+    let regex = new RegExp(`\\b${key}\\b`, 'g');
     input = input.replace(regex, fractions[key]);
 });
 
 
-
+    /* commented out for failing to copy capitalisation at sentence start
+    
     // emphasize special terms
     let cookingTerms = ["braise", "poach", "caramelize", "sear", "saute", "deglaze", "emulsify", "flambe",
     "rehydrate", "parboil", "puree", "roast", "scald", "truss", "zest", "julienne", "marinate", "broil",
     "blanch", "fillet", "brine", "confection", "garnish", "infuse", "temper", "whip", "knead"];
 
+    
     cookingTerms.forEach((term) => {
     let regex = new RegExp(`\\b${term}\\b`, 'gi');
     input = input.replace(regex, `<em>${term}</em>`);
 });
 
+    */
 
 
 
@@ -242,7 +245,7 @@
     let tempFormats = ['C', 'F'];
 
     tempFormats.forEach((tempFormat) => {
-    let regex = new RegExp(`(\\d+)\\s*°?\\s*${tempFormat}\\b`, 'gi');
+    let regex = new RegExp(`(\\d+)\\s*\\°?\\s*${tempFormat}\\b`, 'gi');
     input = input.replace(regex, (match, p1) => `${p1}°${tempFormat}`);
 });
 
@@ -254,7 +257,7 @@
     let temps = [celsius, fahrenheit];
 
     temps.forEach((temp) => {
-    let regex = new RegExp(`(-?\\d+)\\s*°\\s*${temp.abbr}\\b`, 'gi');
+    let regex = new RegExp(`(-?\\d+)\\s*\\°\\s*${temp.abbr}\\b`, 'gi');
     input = input.replace(regex, (match, p1) => {
     let convertedTemp = temp.conversion(Number(p1)).toFixed(0);
     let formattedTemp = `${p1}°${temp.abbr}`;
