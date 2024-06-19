@@ -2,8 +2,13 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="Submission_Form.css">
+    <meta charset="UTF-8">
 </head>
 <body>
+<!-- Header -->
+<header>
+    <h1>Header Content</h1>
+</header>
 
 <!-- The Modal -->
 <div id="submit-modal" class="modal">
@@ -14,68 +19,80 @@
         <p id="modal-text"></p>
         <button id="confirm-submit">Confirm</button>
     </div>
-
 </div>
 
-<form>
-    <div class="form-section">
-        <div class="form-inputs">
-            <div class="input-group">
-                <label for="title">Recipe Title</label>
-                <input type="text" id="title"  maxlength="400">
+<div class="container">
+    
+    
+    <form>
+        
+        
+        <div class="form-section">
+            <div class="form-inputs">
+                <div class="input-group">
+                    <label for="title">Recipe Title</label>
+                    <input type="text" id="title"  maxlength="400">
+                </div>
+                <div class="input-group">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" maxlength="300">
+                </div>
+                <div class="input-group">
+                    <label for="description">Recipe Description [1200 char max]</label>
+                    <textarea id="description" maxlength="1200"></textarea>
+                </div>
+    
+                <div class="input-group">
+                    <label for="image-upload">Image Upload</label>
+                    <input type="file" id="image-upload" accept="image/*">
+                </div>
+                <div class="input-group">
+                    <label for="image-url">Or Image URL</label>
+                    <input type="url" id="image-url">
+                </div>
             </div>
-            <div class="input-group">
-                <label for="author">Author</label>
-                <input type="text" id="author" maxlength="300">
-            </div>
-            <div class="input-group">
-                <label for="description">Recipe Description [1200 char max]</label>
-                <textarea id="description" maxlength="1200"></textarea>
-            </div>
-
-            <div class="input-group">
-                <label for="image-upload">Image Upload</label>
-                <input type="file" id="image-upload" accept="image/*">
-            </div>
-            <div class="input-group">
-                <label for="image-url">Or Image URL</label>
-                <input type="url" id="image-url">
+    
+            <div class="image-preview">
+                <img id="image-preview" style="max-width: 100%;">
             </div>
         </div>
-
-        <div class="image-preview">
-            <img id="image-preview" style="max-width: 100%;">
+    
+        <div class="form-section">
+            <h3>Ingredients</h3>
+            <div class="input-group">
+                <label for="ingredient-input">Add ingredient</label>
+                <input type="text" id="ingredient-input"  maxlength="10000">
+                <button class="add-button" onClick="addIngredient(event)">Add</button>
+            </div>
+    
+            <ol id="ingredient-list" class="non-numbered">
+                <!-- Here is where you will add/delete ingredients dynamically. -->
+            </ol>
         </div>
-    </div>
-
-    <div class="form-section">
-        <h3>Ingredients</h3>
-        <div class="input-group">
-            <label for="ingredient-input">Add ingredient</label>
-            <input type="text" id="ingredient-input"  maxlength="10000">
-            <button onClick="addIngredient(event)">Add</button>
+    
+        <div class="form-section">
+            <h3>Steps</h3>
+            <div class="input-group">
+                <label for="step-input">Add step</label>
+                <input type="text" id="step-input"  maxlength="10000">
+                <button class="add-button" onClick="addStep(event)">Add</button>
+            </div>
+    
+            <ol id="step-list">
+                <!-- Here is where you will add/delete steps dynamically. -->
+            </ol>
         </div>
+    
+        <button id="submit-recipe">Submit Recipe</button>
+    </form>
+    
+    
+</div>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 CulinaryArts</p>
+</footer>
 
-        <ol id="ingredient-list" class="non-numbered">
-            <!-- Here is where you will add/delete ingredients dynamically. -->
-        </ol>
-    </div>
-
-    <div class="form-section">
-        <h3>Steps</h3>
-        <div class="input-group">
-            <label for="step-input">Add step</label>
-            <input type="text" id="step-input"  maxlength="10000">
-            <button onClick="addStep(event)">Add</button>
-        </div>
-
-        <ol id="step-list">
-            <!-- Here is where you will add/delete steps dynamically. -->
-        </ol>
-    </div>
-
-    <button id="submit-recipe">Submit Recipe</button>
-</form>
  <script src="Submission_Form.js"> </script>
 </body>
 </html>
