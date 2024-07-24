@@ -33,6 +33,25 @@
     document.getElementById('image-preview').src = url;
 }, false);
 }
+
+    function clearInputs() {
+        document.getElementById("title").value = "";
+        document.getElementById("author").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("image-upload").value = "";
+        document.getElementById("image-url").value = "";
+        document.getElementById('image-preview').src = "#"; // Assuming you want to reset the image preview as well
+        document.getElementById("ingredient-input").value = "";
+        document.getElementById("step-input").value = "";
+        recipe._ingredients = [];
+        recipe._steps = [];
+        // assuming you have elements with these ids to display the ingredients and steps
+        document.getElementById("ingredient-list").textContent = "";
+        document.getElementById("step-list").textContent = "";
+        // you may replace "#"" with your default image url
+    }
+
+
     function setUpSubmitRecipeEvent() {
 
     const modal = document.getElementById("submit-modal");
@@ -47,7 +66,9 @@
     recipe.author = sanitize(recipe.author);
     recipe.recipeDescription = sanitize(recipe.recipeDescription);
     alert("Submission sent");
-});
+    clearInputs(); // clear input fields
+
+    });
 
     let submit = document.getElementById("submit-recipe");
     submit.addEventListener("click", function (e) {
