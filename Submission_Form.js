@@ -42,6 +42,7 @@
 
     confirmSubmit.addEventListener("click", function () {
     modal.style.display = "none";
+    document.body.style.overflow = 'auto';
     recipe.recipeTitle = sanitize(recipe.recipeTitle);
     recipe.author = sanitize(recipe.author);
     recipe.recipeDescription = sanitize(recipe.recipeDescription);
@@ -62,7 +63,8 @@
     // Create an img element and set its src attribute to the image source in the preview section
     let img = document.createElement("img");
     img.src = document.getElementById("image-preview").src;
-    img.style.width = "100%"; // or another desired width
+    img.style.maxWidth = "400px";
+    img.style.maxHeight = "400px";
     modalText.appendChild(img);
 
     let title = document.createElement('h2');
@@ -113,16 +115,19 @@
 }
 
     modal.style.display = "block";
+    document.body.style.overflow = 'hidden';
 
     span.onclick = function () {
     modal.style.display = "none";
-}
+    document.body.style.overflow = 'auto';
+    }
 });
 
     window.onclick = function (event) {
     if (event.target === modal) {
     modal.style.display = "none";
-}
+    document.body.style.overflow = 'auto';
+    }
 }
 }
     function setUpKeyDownEvents() {
@@ -158,7 +163,7 @@
     function addToList(event, inputElementId, listElementId, listArray, listArrayRaw) {
     event.preventDefault();
     let input = document.getElementById(inputElementId).value;
-
+    document.getElementById(inputElementId).value = "";
     //Check if the input value is not empty or white spaces
     if(input.trim().length > 0){
     let listDisplay = document.getElementById(listElementId);
@@ -178,7 +183,6 @@
     let div = document.createElement('div');  // Create a container
     div.innerHTML = listObject[i];            // Put your content in the container
     div.contentEditable = "true";             // Make only the container editable
-
     let deleteButton = document.createElement('button');
     deleteButton.innerHTML = 'Delete';
     deleteButton.className = 'delete-button'; // Add class name to the delete button
@@ -222,23 +226,6 @@
     let regex = new RegExp(`\\b${key}\\b`, 'g');
     input = input.replace(regex, fractions[key]);
 });
-
-
-    /* commented out for failing to copy capitalisation at sentence start
-    
-    // emphasize special terms
-    let cookingTerms = ["braise", "poach", "caramelize", "sear", "saute", "deglaze", "emulsify", "flambe",
-    "rehydrate", "parboil", "puree", "roast", "scald", "truss", "zest", "julienne", "marinate", "broil",
-    "blanch", "fillet", "brine", "confection", "garnish", "infuse", "temper", "whip", "knead"];
-
-    
-    cookingTerms.forEach((term) => {
-    let regex = new RegExp(`\\b${term}\\b`, 'gi');
-    input = input.replace(regex, `<em>${term}</em>`);
-});
-
-    */
-
 
 
     // Detect and properly format temperatures
