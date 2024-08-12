@@ -33,6 +33,25 @@
     document.getElementById('image-preview').src = url;
 }, false);
 }
+
+    function clearInputs() {
+        document.getElementById("title").value = "";
+        document.getElementById("author").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("image-upload").value = "";
+        document.getElementById("image-url").value = "";
+        document.getElementById('image-preview').src = "#"; // Assuming you want to reset the image preview as well
+        document.getElementById("ingredient-input").value = "";
+        document.getElementById("step-input").value = "";
+        recipe._ingredients = [];
+        recipe._steps = [];
+        // assuming you have elements with these ids to display the ingredients and steps
+        document.getElementById("ingredient-list").textContent = "";
+        document.getElementById("step-list").textContent = "";
+        // you may replace "#"" with your default image url
+    }
+
+
     function setUpSubmitRecipeEvent() {
 
     const modal = document.getElementById("submit-modal");
@@ -42,11 +61,14 @@
 
     confirmSubmit.addEventListener("click", function () {
     modal.style.display = "none";
+    document.body.style.overflow = 'auto';
     recipe.recipeTitle = sanitize(recipe.recipeTitle);
     recipe.author = sanitize(recipe.author);
     recipe.recipeDescription = sanitize(recipe.recipeDescription);
     alert("Submission sent");
-});
+    clearInputs(); // clear input fields
+
+    });
 
     let submit = document.getElementById("submit-recipe");
     submit.addEventListener("click", function (e) {
@@ -62,7 +84,8 @@
     // Create an img element and set its src attribute to the image source in the preview section
     let img = document.createElement("img");
     img.src = document.getElementById("image-preview").src;
-    img.style.width = "100%"; // or another desired width
+    img.style.maxWidth = "400px";
+    img.style.maxHeight = "400px";
     modalText.appendChild(img);
 
     let title = document.createElement('h2');
@@ -113,16 +136,19 @@
 }
 
     modal.style.display = "block";
+    document.body.style.overflow = 'hidden';
 
     span.onclick = function () {
     modal.style.display = "none";
-}
+    document.body.style.overflow = 'auto';
+    }
 });
 
     window.onclick = function (event) {
     if (event.target === modal) {
     modal.style.display = "none";
-}
+    document.body.style.overflow = 'auto';
+    }
 }
 }
     function setUpKeyDownEvents() {
@@ -158,7 +184,7 @@
     function addToList(event, inputElementId, listElementId, listArray, listArrayRaw) {
     event.preventDefault();
     let input = document.getElementById(inputElementId).value;
-
+    document.getElementById(inputElementId).value = "";
     //Check if the input value is not empty or white spaces
     if(input.trim().length > 0){
     let listDisplay = document.getElementById(listElementId);
@@ -178,7 +204,6 @@
     let div = document.createElement('div');  // Create a container
     div.innerHTML = listObject[i];            // Put your content in the container
     div.contentEditable = "true";             // Make only the container editable
-
     let deleteButton = document.createElement('button');
     deleteButton.innerHTML = 'Delete';
     deleteButton.className = 'delete-button'; // Add class name to the delete button
@@ -219,30 +244,16 @@
 };
     Object.keys(fractions).forEach((key) => {
     // This will replace all fractions found in the string using regex
-    let regex = new RegExp(key, 'g');
+    let regex = new RegExp(`\\b${key}\\b`, 'g');
     input = input.replace(regex, fractions[key]);
 });
-
-
-
-    // emphasize special terms
-    let cookingTerms = ["braise", "poach", "caramelize", "sear", "saute", "deglaze", "emulsify", "flambe",
-    "rehydrate", "parboil", "puree", "roast", "scald", "truss", "zest", "julienne", "marinate", "broil",
-    "blanch", "fillet", "brine", "confection", "garnish", "infuse", "temper", "whip", "knead"];
-
-    cookingTerms.forEach((term) => {
-    let regex = new RegExp(`\\b${term}\\b`, 'gi');
-    input = input.replace(regex, `<em>${term}</em>`);
-});
-
-
 
 
     // Detect and properly format temperatures
     let tempFormats = ['C', 'F'];
 
     tempFormats.forEach((tempFormat) => {
-    let regex = new RegExp(`(\\d+)\\s*°?\\s*${tempFormat}\\b`, 'gi');
+    let regex = new RegExp(`(\\d+)\\s*\\°?\\s*${tempFormat}\\b`, 'gi');
     input = input.replace(regex, (match, p1) => `${p1}°${tempFormat}`);
 });
 
@@ -254,7 +265,7 @@
     let temps = [celsius, fahrenheit];
 
     temps.forEach((temp) => {
-    let regex = new RegExp(`(-?\\d+)\\s*°\\s*${temp.abbr}\\b`, 'gi');
+    let regex = new RegExp(`(-?\\d+)\\s*\\°\\s*${temp.abbr}\\b`, 'gi');
     input = input.replace(regex, (match, p1) => {
     let convertedTemp = temp.conversion(Number(p1)).toFixed(0);
     let formattedTemp = `${p1}°${temp.abbr}`;

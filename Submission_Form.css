@@ -14,11 +14,53 @@
     }
 }
 
+/* General CSS and shared styles from index CSS */
+* { padding: 0; margin: 0; box-sizing: border-box; font-family: 'Josefin Sans', sans-serif; }
+
 body {
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
+    background-color: #121923;
+}
+
+.container {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align to start to prevent stretching full height */
+    min-height: calc(100vh - 200px); /* Remove this line if you do not want footer stuck to bottom */
+    flex-direction: column; /* Align children vertically */
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px;
+    background: #acb4b5; /* From #header in index.css */
+    text-align: center;
+}
+
+/* Combining Footer styles */
+footer {
+    width: 100%;
+    padding: 60px;
+    background: #acb4b5;
+    color: black;
+    text-align: center;
+    background: #acb4b5; /* From #footer in index.css */
+    color: #edffef; /* From footer h5 in index.css */
+}
+
+footer h5 {
+    font-size: 25px;
+    margin-top: 10px;
+    text-align: center;
+    color: #edffef; /* From footer h5 in index.css */
 }
 
 form {
@@ -34,11 +76,10 @@ form {
     flex-direction: column; /* Column direction by default */
     flex-wrap: wrap; /* Added: Wrap child items */
     justify-content: space-between; /* Added: Set space evenly between children */
-    border: 1px solid #dddddd;
+    /*border: 1px solid #dddddd;*/
     margin: 10px;
     padding: 20px;
     overflow-y: auto;
-    max-height: 90vh;
 }
 
 /* Target only the first form-section for the horizontal layout */
@@ -47,20 +88,66 @@ form {
     align-items: center; /* Vertically align the child elements in the center */
 }
 
-.form-section:first-child > .form-inputs,
-.form-section:first-child > .image-preview {
+.image-preview{
+    max-width: 250px;
+    max-height: 250px;
+    padding: 13px;
+}
+
+#image-url{
+    height: fit-content;
+    width: auto;
+}
+
+.form-section:first-child > .form-inputs {
     flex: 1 0 200px;
     margin: 10px;
 }
 
+.form-section{
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.form-section:nth-child(9n+1) {
+    background-color: #607579;
+}
+.form-section:nth-child(9n+2) {
+    background-color: #182f32;
+}
+.form-section:nth-child(9n+3) {
+    background-color: #314e52;
+}
+.form-section:nth-child(9n+4) {
+    background-color: #acb4b5;
+}
+.form-section:nth-child(9n+5) {
+    background-color: #213032;
+}
 
 .input-group {
     margin-bottom: 3px;
 }
 
+h3{
+    color: #ffffff;
+}
+h4{
+    color: #97a2a3;
+}
+
+input[type="text"] {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    padding: 10px;
+}
+
 .input-group label {
     display: block;
     margin-bottom: 5px;
+    padding: 10px;
+    color: #edffef; /* From h2 in index.css */
 }
 
 .input-group input, .input-group textarea {
@@ -70,9 +157,37 @@ form {
 
 #title, #author {
     height: 30px;
+    font-size: medium;
+    padding: 10px;
 }
 #description {
     height: 80px;
+    padding: 10px;
+}
+
+ul li {
+    padding: 13px;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+ol li{
+    padding: 13px;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+ol#step-list {
+    counter-reset: list;
+    list-style-type: none;
+}
+
+ol#step-list > li {
+    counter-increment: list;
+}
+
+ol#step-list > li::before {
+    content: counter(list) ". ";
 }
 
 ol.non-numbered {
@@ -96,31 +211,70 @@ li div, li button {
 
 /* The Modal (background) */
 .modal {
+    padding-top: 50px;
+    padding-bottom: 50px;
     display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
+    position: fixed;
+    overflow: auto;
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Located at the top */
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black background with opacity */
 }
 
 /* Modal Content appears when the user hits Submit for the form, requiring they review and confirm their data */
 .modal-content {
-    background-color: #fefefe;
+    background-color: #314e52;
     margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
     width: 80%;
+    height: auto;
+    align-self: auto;
+    align-content: center;
+    padding: 8px 42px;
+    
+}
+.modal::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+}
+
+.modal::-webkit-scrollbar-thumb {
+    background-color: #bdbdbd;
+}
+
+/* This styles the scrollbar for Firefox */
+.modal {
+    scrollbar-width: thin;
+    scrollbar-color: #bdbdbd #f5f5f5;
+}
+
+#confirm-submit{
+    max-width: 200px;
+    align-self: flex-end;
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #ffb700; /* From .contribute button in index.css */
+    color: #000000; /* From .contribute button in index.css */
+
+    border: none;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 18px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 /* The Close Button */
 .close {
-    color: #aaaaaa;
+    padding: 18px;
+    color: #000000;
     float: right;
-    font-size: 28px;
+    font-size: 38px;
     font-weight: bold;
 }
 
@@ -131,8 +285,36 @@ li div, li button {
     cursor: pointer;
 }
 
+
 #submit-recipe {
     max-width: 200px;
     align-self: flex-end;
     margin-top: 20px;
+    background-color: #ffb700; /* From .contribute button in index.css */
+    color: #000000; /* From .contribute button in index.css */
+
+    border: none;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 30px 30px 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#submit-recipe .view:hover{
+    background-color: grey;
+}
+
+.add-button {
+    padding: 7px 18px;
+    margin-top: 10px;
+    background-color: #abc3c7;
+    color: #000000;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-top-right-radius: 15px; 
+    border-bottom-left-radius: 15px;
+    float: right;
 }
